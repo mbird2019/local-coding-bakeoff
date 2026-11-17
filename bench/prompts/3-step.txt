@@ -1,0 +1,6 @@
+Read PLAN.md, NEED.md and STACK.md. Do step {N} of PLAN.md, and only that step.
+- Create or change only the files that step {N} names. Do not start later steps. Do not change tests written in earlier steps.
+- When you have written the code, run the step's "Done when" command yourself. If it fails, read the error, fix the code, and run it again until it passes.
+- Then run the "Test all" command from the top of PLAN.md and make sure earlier steps still pass.
+- A checker runs after you: a test that checks nothing, hides an error, is skipped, or still passes without your code change is refused. If the step cannot be done as written, say so; do not make the test pass another way.
+- Finish with one line: "Step {N} done" or "Step {N} stuck: <why>".

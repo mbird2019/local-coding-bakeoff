@@ -1,0 +1,56 @@
+# local coding bake-off. Bake-off model servers and agent sandbox. Started/stopped only by window.sh.
+x-swap: &swap
+  image: ghcr.io/mostlygeek/llama-swap:unified-cuda@sha256:8907f74709834c12b77e7958e1ee9f442713434cc38dd623e725d5553a51b778
+  user: "1000:1000"
+  init: true
+  runtime: nvidia
+  restart: "no"
+  stop_grace_period: 15s
+  networks: [default, bakeoff]
+services:
+  bake-p5000:
+    <<: *swap
+    container_name: bake-p5000
+    ports: ["127.0.0.1:8110:8080"]
+    cpuset: "0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38"  # NUMA: the socket that owns this GPU pair (report section 4)
+    volumes:
+      - {type: bind, source: /opt/models, target: /models, read_only: true, bind: {create_host_path: false}}
+      - {type: bind, source: /opt/models, target: /scratchmodels, read_only: true, bind: {create_host_path: false}}
+      - {type: bind, source: ./cfg, target: /etc/llama-swap/config, read_only: true}
+    environment:
+      NVIDIA_VISIBLE_DEVICES: GPU-UUID-HERE,GPU-UUID-HERE  # P5000 + RTX 4000 06:00
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      LLAMA_SWAP_CONFIG: /etc/llama-swap/config/bake-p5000.yaml
+  bake-split:
+    <<: *swap
+    container_name: bake-split
+    ports: ["127.0.0.1:8111:8080"]
+    cpuset: "1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39"  # NUMA: the socket that owns this GPU pair (report section 4)
+    volumes:
+      - {type: bind, source: /opt/models, target: /models, read_only: true, bind: {create_host_path: false}}
+      - {type: bind, source: /opt/models, target: /scratchmodels, read_only: true, bind: {create_host_path: false}}
+      - {type: bind, source: ./cfg, target: /etc/llama-swap/config, read_only: true}
+    environment:
+      # A2000 83:00 first (12 GB), then RTX 4000 82:00 (8 GB). Never 06:00.
+      NVIDIA_VISIBLE_DEVICES: GPU-UUID-HERE,GPU-UUID-HERE
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      LLAMA_SWAP_CONFIG: /etc/llama-swap/config/bake-split.yaml
+  bake-all:
+    <<: *swap
+    container_name: bake-all
+    ports: ["127.0.0.1:8112:8080"]
+    volumes:
+      - {type: bind, source: /opt/models, target: /models, read_only: true, bind: {create_host_path: false}}
+      - {type: bind, source: /opt/models, target: /scratchmodels, read_only: true, bind: {create_host_path: false}}
+      - {type: bind, source: ./cfg, target: /etc/llama-swap/config, read_only: true}
+    environment:
+      # All four cards, big-MoE leg. PCI order:
+      # CUDA0 P5000 04:00 (16G), CUDA1 RTX 4000 06:00 (8G), CUDA2 RTX 4000 82:00 (8G), CUDA3 A2000 83:00 (12G)
+      NVIDIA_VISIBLE_DEVICES: GPU-UUID-HERE,GPU-UUID-HERE,GPU-UUID-HERE,GPU-UUID-HERE
+      CUDA_DEVICE_ORDER: PCI_BUS_ID
+      NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      LLAMA_SWAP_CONFIG: /etc/llama-swap/config/bake-all.yaml
+networks:
+  bakeoff:
+    name: bakeoff
+    internal: true

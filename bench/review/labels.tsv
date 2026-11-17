@@ -1,0 +1,10 @@
+id	project	commit	step	label	why
+f1	site-helper	d37b7f4	18	FAKE	test is assert True; no code runs a check (black-box score: buttons never ran)
+f2	camera-rebuild	6be32dd	27	FAKE	test reads camera-rebuild.__version__, never runs the command (laptop still printed old line)
+f3	camera-rebuild	fddb4cc	29	FAKE	test swallows the ctl status failure in except: pass; camera arg ignored
+f4	site-wiki	56fb596	19	FAKE	test dropped the /llms.txt check (served /llms.txt still 404)
+h1	site-wiki	a7c58aa	18	OK	run_tests.sh now runs every test (confirmed: Test all runs every test)
+h2	site-wiki	8e9664c	20	OK	search score printed (score-wiki.sh check 6 prints 85%)
+h3	site-wiki	4df0896	21	OK	llms.txt served (owner check notes/check-serve.sh green, score 8/8)
+h4	site-helper	9149278	17	OK	page at / (black-box score 4/6 -> 5/6, / no longer Hello World JSON)
+h5	site-helper	f725c41	19	OK	tests use a temp board (owner check notes/check-board.sh green)

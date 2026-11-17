@@ -1,0 +1,13 @@
+# done opencode all coder-next devices 40
+# done opencode all qwen36-35b devices 40
+# done opencode all qwen3-coder-30b devices 40
+# done opencode all coder-next ptz 40
+# done opencode all qwen36-35b ptz 40
+# done opencode all qwen3-coder-30b ptz 40
+# done opencode all coder-next recorder 40
+# done opencode all qwen36-35b recorder 40
+# done opencode all qwen3-coder-30b recorder 40
+# done opencode all coder-next config 40
+# done opencode all qwen36-35b config 40
+# done opencode all coder-next mjpeg 40
+# done opencode all qwen36-35b mjpeg 40

@@ -1,0 +1,63 @@
+# local coding bake-off: bake-off llama-swap, lane p5000. One model at a time.
+healthCheckTimeout: 600
+sendLoadingState: false
+globalTTL: 900
+models:
+  qwen35-9b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/vlm/Qwen3.5-9B-Q6_K.gguf -c 65536 -np 1 --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0
+  ornith-9b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Ornith-1.5-9B-Q6_K.gguf -c 65536 -np 1 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0
+  ornith-9b-q4-8gb:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Ornith-1.5-9B-Q4_K_M.gguf -c 16384 -np 1 --temp 0.6 --top-p 0.95 --top-k 20 --min-p 0.0
+  gpt-oss-20b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/gpt-oss-20b-MXFP4.gguf -c 65536 -np 1 --temp 1.0 --top-p 1.0 --chat-template-kwargs '{"reasoning_effort":"medium"}'
+  devstral-24b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf -c 20480 -np 1 --temp 0.15
+  qwen3-coder-30b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf -c 32768 -np 1 --temp 0.7 --top-p 0.8 --top-k 20 --repeat-penalty 1.05 --split-mode layer --tensor-split 8,16
+  qwen35-27b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Qwen3.5-27B-Q4_K_M.gguf -c 32768 -np 1 --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0 --split-mode layer --tensor-split 8,16
+  qwen38-27b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Qwen3.8-27B-UD-Q4_K_XL.gguf -c 32768 -np 1 --temp 0.6 --top-p 0.95 --top-k 20 --presence-penalty 0.0 --split-mode layer --tensor-split 8,16
+  qwen38-27b-nt:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /models/bakeoff/Qwen3.8-27B-UD-Q4_K_XL.gguf -c 32768 -np 1 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --chat-template-kwargs '{"enable_thinking":false}' --split-mode layer --tensor-split 8,16
+  # --- report section 9 entries (2026-11-16): 64K ctx, NUMA-bound, MTP depth 2 ---
+  qwen38-nt-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Qwen3.8-27B-UD-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --chat-template-kwargs '{"enable_thinking":false}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  qwen38-med-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Qwen3.8-27B-UD-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --reasoning-budget 8192 --chat-template-kwargs '{"reasoning_effort":"medium","preserve_thinking":true}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  qwen38-nt:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Qwen3.8-27B-UD-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --chat-template-kwargs '{"enable_thinking":false}'
+  qwopus38-nt-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Qwopus3.8-27B-Coder-Flash-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --chat-template-kwargs '{"enable_thinking":false}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  qwopus38-med-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Qwopus3.8-27B-Coder-Flash-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --reasoning-budget 8192 --chat-template-kwargs '{"reasoning_effort":"medium","preserve_thinking":true}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  swift15-nt-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Swift-1.5-Qwen3.8-27B-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --chat-template-kwargs '{"enable_thinking":false}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  swift15-med-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/Swift-1.5-Qwen3.8-27B-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --reasoning-budget 8192 --chat-template-kwargs '{"reasoning_effort":"medium","preserve_thinking":true}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  thinkcap38-nt-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/ThinkingCap-Qwen3.8-27B-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 0.7 --top-p 0.8 --top-k 20 --min-p 0.0 --presence-penalty 1.5 --chat-template-kwargs '{"enable_thinking":false}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  thinkcap38-med-mtp:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/ThinkingCap-Qwen3.8-27B-Q4_K_M.gguf -c 49152 -np 1 -t 10 --no-context-shift --split-mode layer --tensor-split 8,16 --temp 1.0 --top-p 0.95 --top-k 20 --min-p 0.0 --presence-penalty 0.0 --reasoning-budget 8192 --chat-template-kwargs '{"reasoning_effort":"medium","preserve_thinking":true}' --spec-type draft-mtp --spec-draft-n-max 2 --spec-draft-p-min 0.75
+  gemma4-31b:
+    cmd: >-
+      llama-server --host 127.0.0.1 --port ${PORT} --no-webui -ngl all --fit off -fa on -ctk q8_0 -ctv q8_0 --jinja -m /scratchmodels/gemma-4-31B-it-Q4_K_M.gguf -c 32768 -np 1 -t 10 --no-context-shift --temp 1.0 --top-p 0.95 --top-k 64 --split-mode layer --tensor-split 8,16

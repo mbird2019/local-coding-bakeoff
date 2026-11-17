@@ -1,0 +1,9 @@
+# r9 rows void: reasoning hit max_tokens 8192 (finish=length), fixed in agent.sh 11:42 UTC 2026-11-16
+1116-094042-A-ptz-opencode-qwen38-med-mtp
+1116-102118-A-recorder-opencode-qwen38-med-mtp
+1116-110549-A-mjpeg-opencode-qwen38-med-mtp
+1116-113035-A-ptz-opencode-qwen38-med-mtp
+# void: qwopus38 failed to load at tensor-split 14,6 (CUDA out of memory, HEALTH-FAIL, no model ran); fixed to 13,7 at 21:56 UTC 2026-11-16
+1116-215025-A-devices-opencode-qwopus38-nt-mtp
+1116-215129-A-ptz-opencode-qwopus38-nt-mtp
+1116-215154-A-recorder-opencode-qwopus38-nt-mtp

@@ -1,0 +1,5 @@
+# done opencode p5000 qwen38-27b devices 40
+# done opencode p5000 qwen38-27b ptz 40
+# done opencode p5000 qwen38-27b recorder 40
+# done opencode p5000 qwen38-27b config 40
+# done opencode p5000 qwen38-27b mjpeg 40

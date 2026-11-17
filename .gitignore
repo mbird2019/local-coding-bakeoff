@@ -1,0 +1,7 @@
+.env
+*.key
+*.pem
+*.db
+*.sqlite
+__pycache__/
+*.gguf

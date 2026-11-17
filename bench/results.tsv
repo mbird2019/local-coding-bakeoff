@@ -1,0 +1,267 @@
+id	tier	harness	model	quant	card	step	passed	total	wall_min	nudges	outcome	cause
+1115-000511-A-mjpeg-aider-qwen3-coder-30b	A	aider	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	mjpeg	6	6	3	1	pass-lint	all 6 pass; ruff: trailing whitespace (10 lines in mjpeg.py)
+1115-000800-A-mjpeg-opencode-qwen3-coder-30b	A	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	mjpeg	5	6	31	0	partial	timed out at 41 min (exit 124); failed hidden end-marker-in-header test (cut frame at first FFD9 inside APP segment); ruff: I001 unsorted imports + trailing whitespace
+1115-003803-A-config-aider-qwen3-coder-30b	A	aider	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	config	3	5	4	1	partial	"failed hidden test_set_validates_and_persists (set accepts unknown keys) + test_bad_values (spec-vs-test clamp conflict); ruff: unused import, whitespace, open mode ""r"""
+1115-000800-A-mjpeg-aider-gpt-oss-20b	A	aider	gpt-oss-20b	MXFP4	P5000	mjpeg	4	6	41	0	partial	timed out at 41 min after 3 reflections; failed hidden end-marker test (header skip 2 bytes short) + 1 other; ruff ok
+1115-004803-A-mjpeg-opencode-gpt-oss-20b	A	opencode	gpt-oss-20b	MXFP4	P5000	mjpeg	5	6	2	0	partial	declared done without running pytest; failed 1 hidden test (likely byte-by-byte: buffer cleared when chunk has no SOI); ruff ok
+1115-004146-A-config-opencode-qwen3-coder-30b	A	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	config	3	5	11	0	partial	failed hidden test_set_validates_and_persists (set/set_manual_focus never save) + test_bad_values (spec-vs-test clamp conflict); ruff ok
+1115-005001-A-config-aider-gpt-oss-20b	A	aider	gpt-oss-20b	MXFP4	P5000	config	3	5	6	0	partial	failed hidden test_set_validates_and_persists (never saves) + test_bad_values (spec-vs-test clamp conflict); ruff: unused imports
+1115-005529-A-config-opencode-gpt-oss-20b	A	opencode	gpt-oss-20b	MXFP4	P5000	config	3	5	6	0	partial	failed hidden test_set_validates_and_persists (set raises instead of returning False; never saves) + test_bad_values (spec conflict); ruff: fail (unconfirmed)
+1115-005148-A-config-qwen-qwen3-coder-30b	A	qwen	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	config	2	5	31	1	partial	timed out (exit 124, 31 min); 4 stray files; camera setter never saves + persistence + bad_values tests; ruff: unused imports, open mode
+1115-010105-A-mjpeg-aider-ornith-9b	A	aider	ornith-9b	Q6_K	P5000	mjpeg	0	6	41	0	fail	timed out at 41 min: aider's model API request timed out, no edit made; 4 stubs left
+1115-012207-A-config-mini-qwen3-coder-30b	A	mini	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	config	0	5	31	3	fail	"timed out (exit 124, 31 min) after 35 steps debugging ""off"" persistence; 19 stubs left; stray debug_test.py"
+1115-014107-A-mjpeg-opencode-ornith-9b	A	opencode	ornith-9b	Q6_K	P5000	mjpeg	0	6	24	3	fail	quit at 24 min after only reading files and 3 nudges; 4 stubs left (0/6 NotImplementedError)
+1115-015210-A-config-claude-qwen3-coder-30b	A	claude	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	config	3	5	24	1	partial	6 stray files; failed hidden test_set_validates_and_persists (never saves) + test_bad_values (spec conflict); ruff fail despite agent claiming clean
+1115-020430-A-config-aider-ornith-9b	A	aider	ornith-9b	Q6_K	P5000	config	0	5	41	0	fail	timed out at 41 min: aider's model API request timed out, no edit made; 19 stubs left
+1115-021545-A-mjpeg-aider-qwen35-27b	A	aider	qwen35-27b	Q4_K_M	A2000+RTX4000-82:00	mjpeg	0	6	41	0	fail	timed out at 41 min: aider's model API request timed out, no edit made; 4 stubs left
+1115-024433-A-config-opencode-ornith-9b	A	opencode	ornith-9b	Q6_K	P5000	config	3	5	22	1	partial	failed hidden test_set_validates_and_persists (set_manual_focus never saves) + test_bad_values (spec conflict); ruff ok
+1115-030607-A-mjpeg-aider-qwen35-9b	A	aider	qwen35-9b	Q6_K	P5000	mjpeg	4	6	41	2	partial	timed out at 41 min; failed hidden end-marker-in-header test + 1 other; ruff: trailing whitespace
+1115-034707-A-mjpeg-opencode-qwen35-9b	A	opencode	qwen35-9b	Q6_K	P5000	mjpeg	0	6	41	0	fail	timed out at 41 min printing hex dumps; never got a frame out
+1115-042709-A-mjpeg-aider-devstral-24b	A	aider	devstral-24b	Q4_K_M	P5000	mjpeg	5	6	18	1	partial	failed hidden byte-by-byte test (buffer cleared when chunk has no SOI, split SOI lost); ruff ok
+1115-044428-A-mjpeg-opencode-devstral-24b	A	opencode	devstral-24b	Q4_K_M	P5000	mjpeg	5	6	7	1	partial	failed hidden junk-between-frames test (buffer not trimmed to SOI); ruff: trailing whitespace
+1115-045121-A-config-aider-devstral-24b	A	aider	devstral-24b	Q4_K_M	P5000	config	3	5	7	0	partial	failed hidden test_set_validates_and_persists (focus/names not in _data, never persisted) + test_bad_values (spec conflict); ruff: unused import, open mode
+1115-164653-A-devices-opencode-coder-next	A	opencode	coder-next	UD-IQ4_XS	P5000+RTX4000x2+A2000	devices	7	9	5	0	partial	auto: failed hidden 2 of 9 (2 failed, 7 passed in 0.06s); 1 stubs left
+1115-165142-A-devices-opencode-qwen36-35b	A	opencode	qwen36-35b	UD-Q6_K	P5000+RTX4000x2+A2000	devices	9	9	9	0	pass	auto: all 9 hidden tests pass
+1115-165951-A-devices-opencode-qwen3-coder-30b	A	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000x2+A2000	devices	8	9	7	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.05s); ruff fails
+1115-170638-A-ptz-opencode-coder-next	A	opencode	coder-next	UD-IQ4_XS	P5000+RTX4000x2+A2000	ptz	4	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 13 of 17 (13 failed, 4 passed in 0.17s); ruff fails
+1115-174641-A-ptz-opencode-qwen36-35b	A	opencode	qwen36-35b	UD-Q6_K	P5000+RTX4000x2+A2000	ptz	4	17	41	3	partial	auto: timed out at the cap (exit 124); failed hidden 13 of 17 (13 failed, 4 passed in 0.17s); ruff fails
+1115-182649-A-ptz-opencode-qwen3-coder-30b	A	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000x2+A2000	ptz	5	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 12 of 17 (12 failed, 5 passed in 0.16s); ruff fails
+1115-190653-A-recorder-opencode-coder-next	A	opencode	coder-next	UD-IQ4_XS	P5000+RTX4000x2+A2000	recorder	4	5	9	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s); ruff fails
+1115-191526-A-recorder-opencode-qwen36-35b	A	opencode	qwen36-35b	UD-Q6_K	P5000+RTX4000x2+A2000	recorder	4	5	10	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1115-192454-A-recorder-opencode-qwen3-coder-30b	A	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000x2+A2000	recorder	4	5	15	1	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s); ruff fails
+1115-193905-A-config-opencode-coder-next	A	opencode	coder-next	UD-IQ4_XS	P5000+RTX4000x2+A2000	config	3	5	4	0	partial	auto: failed hidden 2 of 5 (2 failed, 3 passed in 0.05s)
+1115-194250-A-config-opencode-qwen36-35b	A	opencode	qwen36-35b	UD-Q6_K	P5000+RTX4000x2+A2000	config	3	5	6	0	partial	auto: failed hidden 2 of 5 (2 failed, 3 passed in 0.05s)
+1115-194831-A-mjpeg-opencode-coder-next	A	opencode	coder-next	UD-IQ4_XS	P5000+RTX4000x2+A2000	mjpeg	6	6	16	0	pass	auto: all 6 hidden tests pass
+1115-200424-A-mjpeg-opencode-qwen36-35b	A	opencode	qwen36-35b	UD-Q6_K	P5000+RTX4000x2+A2000	mjpeg	6	6	5	0	pass	auto: all 6 hidden tests pass
+1115-213544-A-devices-opencode-qwen38-27b	A	opencode	qwen38-27b	UD-Q4_K_XL	P5000	devices	2	9	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 7 of 9 (7 failed, 2 passed in 0.09s); 10 stubs left; ruff fails
+1115-221547-A-ptz-opencode-qwen38-27b	A	opencode	qwen38-27b	UD-Q4_K_XL	P5000	ptz	0	17	41	0	fail	auto: timed out at the cap (exit 124); failed hidden 17 of 17 (17 failed in 0.24s); 30 stubs left; ruff fails
+1115-225551-A-recorder-opencode-qwen38-27b	A	opencode	qwen38-27b	UD-Q4_K_XL	P5000	recorder	2	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 3 of 5 (3 failed, 2 passed in 0.17s); 18 stubs left; ruff fails
+1115-233554-A-config-opencode-qwen38-27b	A	opencode	qwen38-27b	UD-Q4_K_XL	P5000	config	0	5	41	0	fail	auto: timed out at the cap (exit 124); failed hidden 5 of 5 (5 failed in 0.07s); 19 stubs left; ruff fails
+1116-001556-A-mjpeg-opencode-qwen38-27b	A	opencode	qwen38-27b	UD-Q4_K_XL	P5000	mjpeg	5	6	29	1	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s); ruff fails
+1116-072355-A-devices-opencode-qwen38-27b-nt	A	opencode	qwen38-27b-nt	UD-Q4_K_XL	P5000	devices	9	9	19	0	pass	auto: agent exit 1; all 9 hidden tests pass
+1116-074234-A-ptz-opencode-qwen38-27b-nt	A	opencode	qwen38-27b-nt	UD-Q4_K_XL	P5000	ptz	2	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 15 of 17 (15 failed, 2 passed in 0.17s)
+1116-082237-A-recorder-opencode-qwen38-27b-nt	A	opencode	qwen38-27b-nt	UD-Q4_K_XL	P5000	recorder	4	5	36	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-091453-A-devices-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	devices	8	9	18	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.05s)
+1116-091453-A-devices-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	devices	9	9	26	0	pass	auto: all 9 hidden tests pass
+1116-093238-A-ptz-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	6	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 11 of 17 (11 failed, 6 passed in 0.15s)
+1116-094042-A-ptz-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	ptz	0	17	41	2	void	auto: VOID, left out of the tables: r9 rows void: reasoning hit max_tokens 8192 (finish=length), fixed in agent.sh 11:42 UTC 2026-11-16; failed hidden 17 of 17 (17 failed in 0.22s); 30 stubs left; ruff fails
+1116-101242-A-recorder-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	29	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-102118-A-recorder-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	recorder	4	5	21	1	void	auto: VOID, left out of the tables: r9 rows void: reasoning hit max_tokens 8192 (finish=length), fixed in agent.sh 11:42 UTC 2026-11-16; failed hidden 1 of 5 (1 failed, 4 passed in 0.16s); 14 stubs left; ruff fails
+1116-104047-A-config-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	config	4	5	4	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-104405-A-mjpeg-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	20	0	pass	auto: all 6 hidden tests pass
+1116-104141-A-config-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	config	4	5	25	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-110549-A-mjpeg-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	mjpeg	6	6	23	1	void	auto: VOID, left out of the tables: r9 rows void: reasoning hit max_tokens 8192 (finish=length), fixed in agent.sh 11:42 UTC 2026-11-16; all 6 hidden tests pass; ruff fails
+1116-110345-A-devices-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	devices	9	9	27	0	pass	auto: all 9 hidden tests pass
+1116-112813-A-devices-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	devices	7	9	7	0	partial	auto: failed hidden 2 of 9 (2 failed, 7 passed in 0.07s)
+1116-113035-A-ptz-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	0	17	41	1	void	auto: VOID, left out of the tables: r9 rows void: reasoning hit max_tokens 8192 (finish=length), fixed in agent.sh 11:42 UTC 2026-11-16; timed out at the cap (exit 124); failed hidden 17 of 17 (17 failed in 0.22s); 30 stubs left; ruff fails
+1116-113425-A-ptz-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	ptz	6	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 11 of 17 (11 failed, 6 passed in 0.15s); ruff fails
+1116-121427-A-recorder-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	recorder	5	5	36	0	pass	auto: all 5 hidden tests pass
+1116-121120-A-recorder-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	recorder	2	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 3 of 5 (3 failed, 2 passed in 0.17s); 18 stubs left; ruff fails
+1116-125007-A-config-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	config	4	5	17	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-125122-A-config-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	config	4	5	17	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-130626-A-mjpeg-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	mjpeg	6	6	19	0	pass	auto: all 6 hidden tests pass
+1116-130820-A-mjpeg-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	34	0	pass	auto: all 6 hidden tests pass
+1116-132457-A-ptz-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	ptz	0	17	41	0	fail	auto: timed out at the cap (exit 124); failed hidden 17 of 17 (17 failed in 0.22s); 30 stubs left; ruff fails
+1116-134134-A-ptz-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	6	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 11 of 17 (11 failed, 6 passed in 0.15s)
+1116-171429-A-devices-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	devices	9	9	15	0	pass	auto: all 9 hidden tests pass
+1116-171429-A-recorder-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	recorder	2	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 3 of 5 (3 failed, 2 passed in 0.17s); 18 stubs left; ruff fails
+1116-172917-A-ptz-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	11	17	39	0	partial	auto: failed hidden 6 of 17 (6 failed, 11 passed in 0.12s)
+1116-175433-A-mjpeg-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	P5000	mjpeg	6	6	16	0	pass	auto: all 6 hidden tests pass
+1116-180723-A-recorder-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	7	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-181345-A-config-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	config	4	5	6	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-181915-A-mjpeg-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	6	0	pass	auto: all 6 hidden tests pass
+1116-181012-A-devices-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	devices	9	9	26	0	pass	auto: all 9 hidden tests pass
+1116-182441-A-devices-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	devices	9	9	20	0	pass	auto: all 9 hidden tests pass
+1116-183526-A-ptz-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	ptz	5	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 12 of 17 (12 failed, 5 passed in 0.17s); ruff fails
+1116-184408-A-ptz-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	0	17	41	0	fail	auto: timed out at the cap (exit 124); failed hidden 17 of 17 (17 failed in 0.22s); 30 stubs left; ruff fails
+1116-191529-A-recorder-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	recorder	4	5	25	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-192411-A-recorder-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	28	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-193943-A-config-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	config	3	5	17	0	partial	auto: failed hidden 2 of 5 (2 failed, 3 passed in 0.05s)
+1116-195129-A-config-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	config	4	5	15	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-195557-A-mjpeg-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	mjpeg	5	6	22	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1116-200554-A-mjpeg-opencode-qwen38-med-mtp	A	opencode	qwen38-med-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	29	0	pass	auto: all 6 hidden tests pass
+1116-201742-A-devices-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	devices	9	9	24	0	pass	auto: all 9 hidden tests pass
+1116-204142-A-ptz-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	ptz	5	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 12 of 17 (12 failed, 5 passed in 0.18s); ruff fails
+1116-212144-A-recorder-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	recorder	4	5	26	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-215025-A-devices-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	2	9	2	3	void	auto: VOID, left out of the tables: void: qwopus38 failed to load at tensor-split 14,6 (CUDA out of memory, HEALTH-FAIL, no model ran); fixed to 13,7 at 21:56 UTC 2026-11-16; agent exit 3; failed hidden 7 of 9 (7 failed, 2 passed in 0.08s); 10 stubs left; ruff fails
+1116-215129-A-ptz-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	0	17	1	3	void	auto: VOID, left out of the tables: void: qwopus38 failed to load at tensor-split 14,6 (CUDA out of memory, HEALTH-FAIL, no model ran); fixed to 13,7 at 21:56 UTC 2026-11-16; agent exit 3; failed hidden 17 of 17 (17 failed in 0.22s); 30 stubs left; ruff fails
+1116-215154-A-recorder-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	2	5	1	3	void	auto: VOID, left out of the tables: void: qwopus38 failed to load at tensor-split 14,6 (CUDA out of memory, HEALTH-FAIL, no model ran); fixed to 13,7 at 21:56 UTC 2026-11-16; agent exit 3; failed hidden 3 of 5 (3 failed, 2 passed in 0.18s); 18 stubs left; ruff fails
+1116-215643-A-devices-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	8	9	5	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.06s)
+1116-214712-A-config-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	config	3	5	19	0	partial	auto: failed hidden 2 of 5 (2 failed, 3 passed in 0.05s)
+1116-220118-A-ptz-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	0	17	41	0	fail	auto: timed out at the cap (exit 124); failed hidden 17 of 17 (17 failed in 0.22s); 30 stubs left; ruff fails
+1116-220543-A-mjpeg-opencode-gemma4-31b	A	opencode	gemma4-31b	Q4_K_M	P5000	mjpeg	6	6	41	1	pass-lint	auto: timed out at the cap (exit 124); all 6 hidden tests pass; ruff fails
+1116-224121-A-recorder-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	36	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1116-231705-A-config-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	9	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1116-232510-A-mjpeg-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	2	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1116-232643-A-devices-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	8	9	6	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.07s)
+1116-233145-A-ptz-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	8	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 9 of 17 (9 failed, 8 passed in 0.14s)
+1117-001148-A-recorder-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	8	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-001903-A-config-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	4	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-002243-A-mjpeg-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	31	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-005252-A-devices-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	8	9	8	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.06s)
+1117-010042-A-ptz-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	10	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 7 of 17 (7 failed, 10 passed in 0.13s)
+1117-014044-A-recorder-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-022048-A-config-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	8	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-022824-A-mjpeg-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	3	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-023027-A-devices-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	8	9	11	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.06s)
+1117-024111-A-ptz-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	11	17	32	0	partial	auto: failed hidden 6 of 17 (6 failed, 11 passed in 0.12s)
+1117-031247-A-recorder-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-035250-A-config-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	7	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.06s)
+1117-035928-A-mjpeg-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	20	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-041901-A-devices-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	8	9	6	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.05s)
+1117-042435-A-ptz-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	10	17	39	0	partial	auto: failed hidden 7 of 17 (7 failed, 10 passed in 0.13s)
+1117-050310-A-recorder-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	6	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.19s)
+1117-050912-A-config-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	4	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-051220-A-mjpeg-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	2	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-051346-A-devices-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	9	9	10	0	pass	auto: all 9 hidden tests pass
+1117-052308-A-ptz-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	11	17	35	0	partial	auto: failed hidden 6 of 17 (6 failed, 11 passed in 0.12s)
+1117-055715-A-recorder-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	10	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.17s)
+1117-060716-A-config-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	9	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-061613-A-mjpeg-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	2	0	pass	auto: all 6 hidden tests pass
+1117-071220-A-devices-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	9	9	8	0	pass	auto: all 9 hidden tests pass
+1117-071221-A-ptz-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	P5000	ptz	7	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 10 of 17 (10 failed, 7 passed in 0.15s)
+1117-071930-A-ptz-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	8	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 9 of 17 (9 failed, 8 passed in 0.14s)
+1117-075224-A-recorder-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	P5000	recorder	4	5	39	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-083034-A-config-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	P5000	config	4	5	5	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.06s)
+1117-075933-A-recorder-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-083936-A-config-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	4	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-083500-A-mjpeg-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	P5000	mjpeg	5	6	9	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-084315-A-devices-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	devices	8	9	8	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.05s)
+1117-084240-A-mjpeg-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	35	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-091650-A-devices-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	devices	7	9	8	0	partial	auto: failed hidden 2 of 9 (2 failed, 7 passed in 0.06s)
+1117-085044-A-ptz-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	ptz	12	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 5 of 17 (5 failed, 12 passed in 0.12s)
+1117-092401-A-ptz-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	7	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 10 of 17 (10 failed, 7 passed in 0.15s); ruff fails
+1117-093047-A-recorder-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	recorder	4	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 1 of 5 (1 failed, 4 passed in 0.16s); 1 other files changed
+1117-100403-A-recorder-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	15	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-101049-A-config-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	config	4	5	10	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-101846-A-config-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	config	4	5	4	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-102239-A-mjpeg-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	24	0	pass	auto: all 6 hidden tests pass
+1117-104611-A-devices-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	8	9	5	0	partial	auto: failed hidden 1 of 9 (1 failed, 8 passed in 0.05s)
+1117-102045-A-mjpeg-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	P5000	mjpeg	0	6	41	0	fail	auto: timed out at the cap (exit 124); failed hidden 6 of 6 (6 failed in 0.05s)
+1117-110048-A-devices-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	P5000	devices	9	9	7	0	pass	auto: all 9 hidden tests pass
+1117-105046-A-ptz-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	8	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 9 of 17 (9 failed, 8 passed in 0.14s); ruff fails
+1117-110726-A-ptz-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	P5000	ptz	11	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 6 of 17 (6 failed, 11 passed in 0.12s)
+1117-114729-A-recorder-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	P5000	recorder	4	5	9	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-115547-A-config-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	P5000	config	4	5	5	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-113048-A-recorder-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	31	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-120126-A-config-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	4	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-120439-A-mjpeg-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	2	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-120034-A-mjpeg-opencode-swift15-nt-mtp	A	opencode	swift15-nt-mtp	Q4_K_M	P5000	mjpeg	6	6	6	0	pass	auto: all 6 hidden tests pass
+1117-120631-A-devices-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	P5000	devices	9	9	16	0	pass	auto: all 9 hidden tests pass
+1117-123022-A-devices-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	devices	9	9	5	0	pass	auto: all 9 hidden tests pass
+1117-122208-A-ptz-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	P5000	ptz	6	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 11 of 17 (11 failed, 6 passed in 0.16s)
+1117-123503-A-ptz-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	ptz	8	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 9 of 17 (9 failed, 8 passed in 0.15s)
+1117-130212-A-recorder-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	P5000	recorder	2	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 3 of 5 (3 failed, 2 passed in 0.17s); 18 stubs left; ruff fails
+1117-131506-A-recorder-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	recorder	2	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 3 of 5 (3 failed, 2 passed in 0.17s); 18 stubs left; ruff fails
+1117-135508-A-config-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	config	4	5	13	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-140742-A-mjpeg-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	A2000+RTX4000-82:00	mjpeg	5	6	2	0	partial	auto: failed hidden 1 of 6 (1 failed, 5 passed in 0.04s)
+1117-140913-A-devices-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	devices	9	9	8	0	pass	auto: all 9 hidden tests pass
+1117-134215-A-config-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	P5000	config	4	5	37	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-141651-A-ptz-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	ptz	7	17	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 10 of 17 (10 failed, 7 passed in 0.15s); ruff fails
+1117-141914-A-mjpeg-opencode-qwopus38-nt-mtp	A	opencode	qwopus38-nt-mtp	Q4_K_M	P5000	mjpeg	4	6	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 2 of 6 (2 failed, 4 passed in 0.04s)
+1117-145916-A-devices-opencode-thinkcap38-nt-mtp	A	opencode	thinkcap38-nt-mtp	Q4_K_M	P5000	devices	9	9	15	0	pass	auto: all 9 hidden tests pass
+1117-145654-A-recorder-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	recorder	4	5	41	0	partial	auto: timed out at the cap (exit 124); failed hidden 1 of 5 (1 failed, 4 passed in 0.16s)
+1117-153656-A-config-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	config	4	5	9	0	partial	auto: failed hidden 1 of 5 (1 failed, 4 passed in 0.05s)
+1117-154532-A-mjpeg-opencode-qwen38-nt-mtp	A	opencode	qwen38-nt-mtp	UD-Q4_K_M	A2000+RTX4000-82:00	mjpeg	6	6	36	0	pass	auto: all 6 hidden tests pass
+camera-rebuild-01	B	aider	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	1	0	1	6	3	stuck	"aider applied edits to nonsense file names (""Applied edit to main()"") when the step created 4 new files; opencode + same model green in 2 min"
+camera-rebuild-02	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	2	0	1	5	3	stuck-bench-bug	bench bug: bench install died silently on root-owned files, so camera-rebuild was never installed (command not found); fixed in bench, not a model failure
+camera-rebuild-03	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	2	1	1	2	0	green	
+camera-rebuild-04	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	3	0	1	5	3	stuck	single-instance lock never held: the first instance exits at once, so the second never sees a lock; coder rewrote the test 3 times without fixing the app
+camera-rebuild-05	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	1	1	1	2	1	green	row restored; lost in reset
+camera-rebuild-06	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	3	0	1	5	3	stuck-harness-perm	harness permission: opencode refused commands outside /work (external_directory); sandbox now allows it
+camera-rebuild-07	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	3	1	1	6	0	green	
+camera-rebuild-08	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	4	1	1	4	0	green	
+camera-rebuild-09	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	5	1	1	3	0	green	
+camera-rebuild-10	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	6	1	1	3	0	green	
+camera-rebuild-11	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	7	1	1	2	0	green	
+camera-rebuild-12	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	8	1	1	18	0	green	
+camera-rebuild-13	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	9	1	1	8	0	green	
+camera-rebuild-14	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	10	1	1	15	0	green	
+camera-rebuild-15	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	11	1	1	2	0	green	
+camera-rebuild-16	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	12	1	1	2	0	green	
+camera-rebuild-17	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	13	1	1	3	0	green	
+camera-rebuild-18	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	14	0	1	24	3	stuck	test built the window with no Qt app object; Qt error swallowed by pytest when the process aborted, so coder and nudge never saw it (steps.sh now reruns with -s)
+camera-rebuild-19	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	14	0	1	28	0	stopped	coder looped on a hanging python -c CameraRebuildApp() (2-min tool timeout), same hidden Qt error; stopped by hand
+camera-rebuild-20	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	14	1	1	11	3	green	
+camera-rebuild-21	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	15	1	1	3	1	green	
+camera-rebuild-22	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	16	1	1	4	1	green	
+camera-rebuild-23	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	17	1	1	5	0	green	
+camera-rebuild-24	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	18	1	1	59	1	green	
+camera-rebuild-25	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	19	1	1	9	0	green	
+camera-rebuild-26	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	20	1	1	3	0	green	
+camera-rebuild-27	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	21	0	1	36	3	stuck	step too big: ruff on the whole repo, 90 errors (43->34->30 per nudge, reset to 90); Test all had 5 hidden regressions from step 18. PLAN edit: Test all step + lint split into 24/25
+camera-rebuild-28	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	21	0	1	21	1	stopped	Tier C moved to split; camera-rebuild lane -> p5000; attempt reset: 12 failures after nudge 1; coder had edited tests/test_camera_off.py and tests/test_integration.py against the step
+camera-rebuild-29	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000	21	0	1	5	0	stopped	p5000 lane recreated with the 06:00 RTX 4000 added
+camera-rebuild-30	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	21	1	1	14	1	green	
+camera-rebuild-31	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	22	1	1	3	0	green	
+camera-rebuild-32	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	24	0	1	9	3	stuck	step too big: ruff 0.17.5 defaults include BLE001 blind-except (16 of 27 errors); 16 -> 8 -> 5, narrowing catches risked behaviour; split by error kind
+camera-rebuild-33	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	24	1	1	4	0	green	
+camera-rebuild-34	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	25	0	1	13	3	stuck	blind-except: coder narrowed the camera-open catch, regression gate caught test_camera_capture_failure; looped narrow -> broad (1 error left)
+camera-rebuild-35	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	25	0	1	28	3	stuck	same loop after the step text said camera open must catch everything; qwen3-coder-30b never chose an exemption ruff accepts; bigger model (qwen35-27b) green
+camera-rebuild-36	B	opencode	qwen35-27b	Q4_K_M	P5000+RTX4000-06:00	25	1	1	28	0	green	
+camera-rebuild-37	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	26	1	1	8	2	green	
+camera-rebuild-38	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	27	1	1	5	1	green	
+camera-rebuild-39	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	28	1	1	4	0	green	
+camera-rebuild-40	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	29	1	1	31	0	green	
+camera-rebuild-41	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	30	1	1	9	0	green	Done when green; regression gate hung: old tests/test_cli_base.py::test_camera_arg waits for the app to exit, which it no longer does since step 29; committed by hand, fix is step 31
+camera-rebuild-42	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	31	1	1	14	0	green	
+camera-rebuild-43	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	32	1	1	12	1	green	
+camera-rebuild-44	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	33	1	1	13	2	green	
+camera-rebuild-45	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	34	0	1	14	3	stuck	snap and record in one step: coder wrote tests/test_ctl_record.py instead of the named test file, pytest collected 0 items twice; split into 34 snap, 35 record
+camera-rebuild-46	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	34	1	1	8	0	green	
+camera-rebuild-47	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	35	1	1	10	0	green	
+camera-rebuild-48	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	36	1	1	6	0	green	
+camera-rebuild-49	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	37	1	1	5	0	green	
+camera-rebuild-50	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	38	1	1	19	1	green	
+camera-rebuild-51	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	39	1	1	7	0	green	
+site-wiki-01	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	1	1	1	4	0	green	
+site-wiki-02	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	2	1	1	2	0	green	
+site-wiki-03	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	3	1	1	10	0	green	
+site-wiki-04	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	4	1	1	3	0	green	
+site-wiki-05	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	5	1	1	3	0	green	
+site-wiki-06	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	6	0	1	3	3	stuck	plan named the JS test tests/search/setup.js, which jest never runs (testMatch wants *.test.js): No tests found; the coder ran pytest on it instead. Planner error flagged at review; the owner edit -> setup.test.js
+site-wiki-07	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	6	1	1	3	0	green	
+site-wiki-08	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	7	1	1	2	0	green	
+site-wiki-09	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	8	1	1	2	0	green	
+site-wiki-10	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	9	1	1	5	0	green	
+site-wiki-11	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	10	1	1	6	0	green	
+site-wiki-12	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	11	1	1	11	0	green	
+site-wiki-13	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	12	1	1	6	0	green	
+site-wiki-14	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	13	1	1	6	0	green	
+site-wiki-15	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	14	1	1	2	0	green	
+site-wiki-16	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	15	1	1	8	0	green	
+site-wiki-17	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	16	1	1	5	0	green	
+site-wiki-18	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	18	1	1	3	0	green	
+site-wiki-19	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	19	1	1	10	0	green	
+site-wiki-20	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	20	1	1	9	0	green	
+site-wiki-21	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	21	1	1	7	0	green	
+site-helper-01	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	1	1	1	5	1	green	
+site-helper-02	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	2	1	1	4	0	green	
+site-helper-03	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	3	1	1	2	0	green	
+site-helper-04	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	4	1	1	38	2	green	
+site-helper-05	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	5	1	1	9	0	green	
+site-helper-06	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	6	1	1	4	2	green	
+site-helper-07	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	7	1	1	2	0	green	
+site-helper-08	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	8	1	1	13	0	green	
+site-helper-09	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	9	1	1	5	0	green	
+site-helper-10	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	10	1	1	8	0	green	
+site-helper-11	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	11	1	1	16	3	green	
+site-helper-12	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	12	1	1	20	1	green	
+site-helper-13	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	13	1	1	5	1	green	
+site-helper-14	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	14	1	1	6	1	green	
+site-helper-15	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	15	1	1	5	1	green	
+site-helper-16	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	17	1	1	6	1	green	
+site-helper-17	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	18	1	1	2	1	green	step 18 green but faked: app.js simulates check results with hardcoded names, test_18_run_check.py is assert True; found by score-helper.sh, redone as step 20 with a owner check script
+site-helper-18	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	19	1	1	9	1	green	
+site-helper-19	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	20	0	1	7	3	stuck	step 20 with an owner-written check script (notes/check-run.sh) stayed red through 3 nudges: /api/run-check first answered 404, then 200 for the broken check as well as the good one; in one nudge the coder edited a check definition instead of the code and called it resolved (steps-20.log)
+camera-rebuild-all-1	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	all	5	11			laptop-score-1 (after steps 1-26, 4f76a63)	Test all 66/66 but camera-rebuild --camera prints 2 lines and exits 0 (no window), so snap/record/off/move/status fail; --version format wrong; --list shows each camera twice. -> PLAN steps 27-29
+camera-rebuild-all-2	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	all	6	11			laptop-score-2 (after steps 27-29, fddb4cc)	app now stays open, --list once; still FAIL: --version (step 27 test checked __version__, not the command), ctl says not running while the app runs (step 29 test swallowed it), so status/snap/record/move fail; Test all hangs on the laptop (test starts the app and waits for exit). -> steps 30-32
+camera-rebuild-all-3	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	all	7	11			laptop-score-3 (after steps 30-32, 9042e5f)	laptop Test all 72 passed (no hang); --version and ctl reach the app now; still FAIL: every ctl command only echoes status received (status/snap/record/move do nothing; step 32 test only checked not-running). -> steps 33-35
+camera-rebuild-all-4	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	all	8	11			laptop-score-4 (after steps 33-36, 9d84006)	status truthful now; still FAIL: snap no frame available (app never reads frames), record ignores --output-dir and ffmpeg fails on framerate 0, move says not supported but exits 0. New tests again caught and ignored failures (test_ctl_move) or only tested the not-running case (status). -> steps 37-39
+site-wiki-all-5	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	all	7	8			real-check-1 (after steps 1-16, cfe81d2; score-wiki.sh in sandbox; check 7 manual)	build, page count 198, broken link named, title, search proxies, tsv test pass; FAIL /llms.txt 404 when served (mkdocs serve skips the llms generator); also no percentage printed for check 6 and run_tests.sh ran only one python test file. -> steps 18-20
+camera-rebuild-all-6	B	opencode	qwen3-coder-30b	UD-Q4_K_XL	P5000+RTX4000-06:00	all	8	11			laptop-score-5 (after steps 37-39, f002df3)	laptop Test all 84 passed; snap still no frame, record stop hangs and the app dies (next ctl says not running); cause found black-box: no camera-rebuild process ever opens /dev/video (status on is only a flag); stand-in camera tests pass. test_ctl_move.py kept 4 except-Exception blocks despite the step. -> step 40 on the laptop (Done when notes/check-open.sh)
+camera-rebuild-all-7	B	opencode	qwen35-27b	Q4_K_M	P5000+RTX4000-06:00	all	7	11			laptop-score-6 (after step 40 on laptop, 417d478; scorer check-4 false positive fixed)	camera opens and snap saves in the output folder, but at 640x480 not 1280x720; record stop hangs past 5 s and the app dies (ffmpeg opens the device the preview holds: VIDIOC_DQBUF busy), so off and move fail. -> steps 41-42 on the laptop
+site-helper-all-8	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	all	4	6			real-check-1 (after steps 1-15, 8c14e15; score-helper.sh in sandbox; check 7 manual)	FAQ 85/85 own answer, none-fit, movie, reminder write and read back pass; FAIL / serves Hello World JSON, not the page; checks are only listed, never run. Also tests write the real board.json. -> steps 17-19
+site-wiki-all-9	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	all	7	8			real-check-2 (after steps 18-20, serve.sh + search-score)	Test all now runs every test; search-score prints 85%; /llms.txt still 404 via ./serve.sh: the step 19 test dropped the llms.txt check (may not be accessible). -> step 21, Done when notes/check-serve.sh
+site-helper-all-10	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	all	5	6			real-check-2 (after steps 17-19, f725c41)	page at / with four bands; FAQ 85/85; none-fit; movie; reminder; board.json now [] and untouched by tests. FAIL: check buttons are simulated in app.js (hardcoded checks and results) and step 18's test is assert True. -> step 20, Done when notes/check-run.sh
+site-wiki-all-11	C	opencode	qwen3-coder-30b	UD-Q4_K_XL	A2000+RTX4000-82:00	all	8	8			real-check-3 (after step 21, 4df0896)	all scripted NEED checks pass: build, 198 pages, broken link named, serve 8301 with /, /faq/, /llms.txt 200, title, search proxies, search-score 85%; check 7 (400 px, menu button) needs a browser, not scored

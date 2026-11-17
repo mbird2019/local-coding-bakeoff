@@ -1,0 +1,19 @@
+Above are NEED.md (what I want) and STACK.md (the tools chosen). Write the build order as PLAN.md for small local AI coding agents. Each agent sees only PLAN.md, NEED.md, STACK.md and the files already in the project, and does ONE step per session. It is not very smart: keep each step small and exact.
+
+Rules for the plan:
+- Start with a header block:
+  Install: <what the dependency file must contain; the install itself is done by me>
+  Test all: <one command>
+  Lint: <one command>
+- Then numbered steps, each in this exact shape:
+  ### Step N: <short title>
+  Files: <the one or two files this step creates or changes, plus its test file>
+  Do: <plain description of what to build, the names of the functions/classes/commands it must have, and how they behave, including errors>
+  Done when: `<one command that runs on the build box and passes only when the step is right>`
+- Step 1 makes the project skeleton: the dependency file, the package folder, a version number, and one test that passes.
+- Every step that adds behaviour also adds tests for it in the same step, and its Done when runs those tests.
+- Files names every file the step may touch, test files too. A step that must change a test from an earlier step names that test file; a checker refuses changes to earlier tests and to test settings (conftest.py, pytest.ini) that the step does not name.
+- Everything that touches the camera, the screen, the sound, other processes or the clock is in its own small piece with a stand-in that tests use. The build box has no camera, screen or sound.
+- Order the steps so each one only needs steps before it. Steps that only work on the real hardware come last, are small, and have a Done when that still runs on the build box (for example: the module imports, and the command prints its help).
+- The last step is "Check on the real machine": copy the check list from NEED.md word for word.
+- Aim for 10 to 20 steps. No step should need more than about 150 new lines of code.

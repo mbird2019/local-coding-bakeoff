@@ -1,0 +1,24 @@
+Above is NEED.md: what I want built. I am an experienced programmer in older languages, but I do not know today's languages or libraries, so you choose them. I will not write code myself; small local AI coding agents will write it one small step at a time, and they make fewer mistakes with popular, well-documented tools.
+
+Facts about where it is built and where it runs:
+- It is built and tested on a Linux build box (a container). The build box has NO camera, NO screen, NO sound card and NO internet, except for one install step that can install packages listed in the project's dependency file (pyproject.toml or requirements.txt from PyPI, or package.json from npm). It cannot install operating-system packages. It has Python 3.11 and node/npm, but no web browser, and cannot download one.
+- It runs on the machine named in NEED.md, where I can install operating-system packages myself (for an Arch-based laptop: pacman).
+- Tests must run on the build box, so anything that needs the camera, the screen or the sound has to be replaceable by a stand-in during tests.
+
+Answer with exactly these sections, short and concrete:
+## Language and main libraries
+(one choice each, with one line why; name the exact package names)
+## What I install on the target machine
+(exact install command)
+## What the build box installs
+(the dependency file name and its contents)
+## How the parts fit
+(the program's main pieces, one line each, and which piece talks to the hardware)
+## How tests run without the hardware
+(what gets replaced by a stand-in, and how the test command is run)
+## Commands
+Test all: <one command>
+Lint: <one command>
+Run the app: <one command>
+## Risks
+(the 3 things most likely to go wrong, and how I would notice)

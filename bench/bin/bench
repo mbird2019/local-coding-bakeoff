@@ -1,0 +1,78 @@
+#!/bin/bash
+# bench - the local coding bench on gpu-host (local coding bake-off, runbooks/local-coding-agents.md).
+#
+#   bench new NAME                       make projects/NAME (git repo) and cd hint
+#   bench ask LANE MODEL FILE... [-- "question"]   send files + question to a model; answer saved in NAME/notes/
+#   bench agent LANE MODEL HARNESS "message"       run a coding agent once in the current project
+#                                        (aider only edits files it is given: FILES="a.py tests/test_a.py" bench agent ...;
+#                                         TEST_CMD="<done when>" makes aider run it and fix until green)
+#   bench run "command"                  run a command in the sandbox in the current project (tests, the app)
+#   bench install                        (needs internet) make .venv in the project from pyproject.toml or requirements.txt
+#   bench steps FROM TO LANE CODER HARNESS   runbook step 4 for steps FROM..TO of PLAN.md (stops at a stuck step)
+#   bench log                            what was sent to agents in this project
+#
+# LANE: p5000 | split. HARNESS: opencode | qwen | aider | mini | claude.
+# Run from inside /opt/bakeoff/projects/NAME. Every message is appended to NAME/notes/bench-log.md.
+set -euo pipefail
+B=/opt/bakeoff
+img=bakeoff-sandbox
+proj=$(git rev-parse --show-toplevel 2>/dev/null || true)
+need_proj() { [ -n "$proj" ] && [[ "$proj" == $B/projects/* ]] || { echo "cd into a project under $B/projects first"; exit 2; }; mkdir -p "$proj/notes"; }
+port() { case $1 in p5000) echo 8110;; split) echo 8111;; *) echo "lane p5000|split" >&2; exit 2;; esac; }
+logit() { printf '\n## %s %s\n\n%s\n' "$(date '+%F %T')" "$1" "$2" >> "$proj/notes/bench-log.md"; }
+home() { local h=$B/homes/$(basename "$proj"); [ -d "$h" ] || { mkdir -p "$h"; cp -a $B/home-template/. "$h/"; }; sudo chmod -R a+rwX "$h" "$proj"; echo "$h"; }
+
+cmd=${1:-}; shift || true
+case "$cmd" in
+new)
+  d=$B/projects/$1; mkdir -p "$d/notes"; git -C "$d" init -q -b main
+  echo "# $1" > "$d/README.md"; printf ".venv/\nnode_modules/\n__pycache__/\n.pytest_cache/\n.ruff_cache/\n.aider*\n*.egg-info/\nnotes/\n" > "$d/.gitignore"; git -C "$d" add -A; git -C "$d" commit -qm "start"
+  echo "made $d" ;;
+ask)
+  need_proj; lane=$1 model=$2; shift 2
+  files=(); q=""
+  while [ $# -gt 0 ]; do [ "$1" = "--" ] && { shift; q="$*"; break; }; files+=("$1"); shift; done
+  out=$proj/notes/ask-$(date +%m%d-%H%M%S)-$model.md
+  logit "ask $model (${files[*]})" "$q"
+  python3 - "$(port $lane)" "$model" "$out" "$q" "${files[@]}" <<'PY'
+import json, sys, time, urllib.request
+port, model, out, q, files = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5:]
+parts = [f"=== {f} ===\n" + open(f).read() for f in files]
+prompt = "\n\n".join(parts + ([q] if q else []))
+t = time.time()
+req = urllib.request.Request(f"http://127.0.0.1:{port}/v1/chat/completions",
+    data=json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}]}).encode(),
+    headers={"Content-Type": "application/json"})
+d = json.load(urllib.request.urlopen(req, timeout=7200))
+ans = d["choices"][0]["message"]["content"] or ""
+fin = d["choices"][0].get("finish_reason")
+open(out, "w").write(ans + "\n")
+print(ans)
+print(f"\n[saved {out}; {d['usage']['completion_tokens']} tokens in {time.time()-t:.0f}s; finish={fin}]")
+if fin != "stop" or not ans.strip():
+    print(f"[INCOMPLETE answer (finish={fin}, {len(ans)} chars): do not use it; ask again]"); sys.exit(4)
+PY
+  ;;
+agent)
+  need_proj; lane=$1 model=$2 h=$3 msg=$4; hd=$(home)
+  logit "agent $h $model" "$msg"
+  printf '%s' "$msg" > "$hd/prompt.txt"
+  t=$(date +%s)
+  sudo docker run --rm --network bakeoff -v "$proj:/work" -v "$hd:/home/agent" -e HOME=/home/agent -e QT_QPA_PLATFORM=offscreen \
+    -e URL=http://bake-$lane:8080 -e MODEL="$model" -e H="$h" -e FILES="${FILES:-}" -e TEST_CMD="${TEST_CMD:-}" -e CTX="${CTX:-32768}" \
+    -v $B/bin/agent.sh:/agent.sh:ro $img timeout "${CAP:-60}m" bash /agent.sh 2>&1 | tee -a "$proj/notes/agent-output.log" | tail -n 60
+  echo "[agent finished in $(( ($(date +%s)-t)/60 )) min]" | tee -a "$proj/notes/bench-log.md" ;;
+run)
+  need_proj; logit "run" "$*"
+  sudo docker run --rm --network none -v "$proj:/work" -e QT_QPA_PLATFORM=offscreen -e PYTEST_ADDOPTS= -e PYTHONNOUSERSITE=1 $img timeout 600 bash -c "cd /work && { [ -d .venv ] && export PATH=/work/.venv/bin:\$PATH; true; } && $*" ;;
+install)
+  need_proj; logit "install" "pip install"
+  sudo chmod -R a+rwX "$proj"
+  sudo docker run --rm --network bakeoff_default -v "$proj:/work" $img bash -c 'cd /work && python3 -m venv .venv &&
+    .venv/bin/pip install -q --upgrade pip && if [ -f pyproject.toml ]; then .venv/bin/pip install -q -e ".[dev]" || .venv/bin/pip install -q -e .; fi;
+    [ -f requirements.txt ] && .venv/bin/pip install -q -r requirements.txt; .venv/bin/pip install -q pytest ruff; .venv/bin/pip list 2>/dev/null | wc -l;
+    if [ -f package.json ]; then npm install --no-audit --no-fund 2>&1 | tail -n 5; fi' ;;
+steps) exec /opt/bakeoff/bin/steps.sh "$@" ;;
+log) need_proj; cat "$proj/notes/bench-log.md" ;;
+*) sed -n '2,13p' "$0"; exit 2 ;;
+esac

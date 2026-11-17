@@ -1,0 +1,10 @@
+id	project	step	label	gate	flags
+f1	site-helper	18	FAKE	RED	config:1 empty:1 noeffect:1 
+f2	camera-rebuild	27	FAKE	RED	noeffect:1 
+f3	camera-rebuild	29	FAKE	RED	empty:1 
+f4	site-wiki	19	FAKE	pass	warn-rerun:1 
+h1	site-wiki	18	OK	pass	warn-noeffect:1 
+h2	site-wiki	20	OK	pass	warn-loosened:1 
+h3	site-wiki	21	OK	pass	warn-rerun:1 
+h4	site-helper	17	OK	pass	none
+h5	site-helper	19	OK	RED	earlier:2 
