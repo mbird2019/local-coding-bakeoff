@@ -45,4 +45,4 @@ Paths, host names and GPU ids are replaced with placeholders (`/opt/bakeoff`, `/
 
 ## Licence
 
-No licence has been chosen yet. Until one is added here, all rights are reserved.
+MIT, for the scripts, configs and results alike. See `LICENSE`.
